@@ -40,6 +40,7 @@ class LinkedList:
                 node = new_node
 
     def __bool__(self):
+        """Return True if self.head exists."""
         return self.head is not None
 
     def __iter__(self):
@@ -47,6 +48,7 @@ class LinkedList:
         return (n.value for n in self.nodes())
 
     def __getitem__(self, index):
+        """Enable slicing."""
         it = iter(self)
         try:
             return next(islice(it, index, index+1))
@@ -63,9 +65,11 @@ class LinkedList:
     #         if i == index:
 
     def __len__(self):
+        """Iterate over self and return the count."""
         return sum(1 for _ in self)
 
     def __repr__(self):
+        """Make repr, including a list of all values."""
         r = '{}({!r})'.format(
             self.__class__.__name__,
             list(self),
@@ -80,6 +84,7 @@ class LinkedList:
             next_node = next_node.link
 
     def pop(self):
+        """Remove the node at 0 and get its value."""
         if self.head is None:
             raise IndexError('pop from empty linked list')
         value = self.head.value
@@ -87,12 +92,17 @@ class LinkedList:
         return value
 
     def push(self, value):
+        """Insert a node at 0 with the given value."""
         new_head = self.__class__.Node(value)
         new_head.link = self.head
         self.head = new_head
 
     def index(self, x, i=0, j=None):
-        """Same as list.index, but for a linked list."""
+        """
+        Get first index where value "x" occurs, where i < index < j.
+
+        Same as list.index, but for a linked list.
+        """
         for e, value in enumerate(self):
             if e < i:
                 continue
@@ -103,11 +113,19 @@ class LinkedList:
         raise ValueError('{!r} is not in linked list'.format(x))
 
     class Node:
+        """Linked list node."""
+
         def __init__(self, value, link=None):
+            """
+            Create node with the given value and link.
+
+            "link" is the next node.
+            """
             self.value = value
             self.link = link
 
         def __repr__(self):
+            """Make repr, without the value of "link" to avoid recursion."""
             r = '{}({!r}, <"link">)'.format(
                 self.__class__.__name__,
                 self.value,
