@@ -99,17 +99,17 @@ class LinkedList:
 
     def index(self, x, i=0, j=None):
         """
-        Get first index where value "x" occurs, where i < index < j.
+        Get first index where value "x" occurs, where i <= index < j.
 
         Same as list.index, but for a linked list.
         """
-        for e, value in enumerate(self):
-            if e < i:
+        for idx, value in enumerate(self):
+            if idx < i:
                 continue
-            if j is not None and e > j:
-                continue
+            if j is not None and idx >= j:
+                break
             if value == x:
-                return e
+                return idx
         raise ValueError('{!r} is not in linked list'.format(x))
 
     class Node:
