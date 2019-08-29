@@ -125,7 +125,12 @@ class LinkedList:
             self.link = link
 
         def __repr__(self):
-            """Make repr, without the value of "link" to avoid recursion."""
+            """
+            Make repr, without the value of "link" to avoid recursion.
+
+            >>> LinkedList.Node(None)
+            Node(None, <"link">)
+            """
             r = '{}({!r}, <"link">)'.format(
                 self.__class__.__name__,
                 self.value,
